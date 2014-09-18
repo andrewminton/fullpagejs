@@ -1,0 +1,74 @@
+//* Vertical Navigation Dots
+
+//* Add this to the post body
+
+[fullpage]
+[header]Header[/header]
+[footer]Footer[/footer]
+[section id="section0"]
+  <div class="intro">
+    <img src="http://www.test.dev/wp-content/uploads/2014/09/1.png" alt="1"/>
+    <h1>Navigation dots</h1>
+    <p>An easy and beautiful way to navigate throw the sections</p>
+  </div>
+[/section]
+[section id="section1"]
+  [slide" id="slide1"]
+	<div class="intro">
+		<h1>Clickable</h1>
+		<p>You can even click on the navigation and jump directly to another section.</p>
+	</div>
+  [/slide]
+  [slide id="slide2"]
+	<h1>Slide 2</h1>
+	<img src="http://www.test.dev/wp-content/uploads/2014/09/iphone-green.png" alt="iphone-green"/>
+  [/slide]
+[/section]
+[section id="section2"]
+  <div class="intro">
+	<h1>Enjoy it</h1>
+  </div>
+[/section]
+[/fullpage]
+
+
+//* Add this to the Custom CSS textarea
+
+/* Style for our header texts
+	* --------------------------------------- */
+	h1{
+		font-size: 5em;
+		font-family: arial,helvetica;
+		color: #fff;
+		margin:0;
+	}
+	.intro p{
+		color: #fff;
+	}
+
+	/* Centered texts in each section
+	* --------------------------------------- */
+	.section{
+		text-align:center;
+	}
+
+	/* Overwriting styles for control arrows for slides
+	* --------------------------------------- */
+	.controlArrow.prev {
+		left: 50px;
+	}
+	.controlArrow.next{
+		right: 50px;
+	}
+	
+//* Add this to the Custom JS textarea
+
+		jQuery(document).ready(function($) {
+			$('#fullpage').fullpage({
+				anchors: ['firstPage', 'secondPage', '3rdPage'],
+				sectionsColor: ['#C63D0F', '#1BBC9B', '#7E8F7C'],
+				navigation: true,
+				navigationPosition: 'right',
+				navigationTooltips: ['First', 'Second', 'Third']
+			});
+		});
