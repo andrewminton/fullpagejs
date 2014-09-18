@@ -1,13 +1,7 @@
 <?php
 /**
- * The template for displaying all pages.
+ * The template for displaying posts that are using fullPage.js
  *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
- *
- * @package Isola
  */
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
@@ -17,9 +11,11 @@
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<link rel="stylesheet" type="text/css" href="/wp-content/plugins/fullpagejs/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo plugins_url('../css/jquery.fullPage.css',__FILE__); ?>" />
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-	<script type="text/javascript" src="/wp-content/plugins/fullpagejs/js/jquery.fullPage.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="<?php echo plugins_url('../js/vendors/jquery.slimscroll.min.js',__FILE__); ?> "></script>	
+	<script type="text/javascript" src="<?php echo plugins_url('../js/jquery.fullPage.min.js',__FILE__); ?>"></script>
 
 <?php
 	$fullpage_css = '<style>' . get_post_meta( get_the_ID(), 'fullpage_css', true ) . '</style>';
@@ -40,8 +36,13 @@ if ( have_posts() ) : the_post();
 
 endif; // end of the loop. 
 
-$fullpage_js = '<script type="text/javascript">' . get_post_meta( get_the_ID(), 'fullpage_js', true ) . '</script>';
-echo $fullpage_js;
+$fullpage_js = get_post_meta( get_the_ID(), 'fullpage_js', true);
+
+if ( empty( $fullpage_js ) ) {
+	$fullpage_js = '$(document).ready(function() {$(\'#fullpage\').fullpage();});';
+}
+
+echo '<script type="text/javascript">' . $fullpage_js . '</script>';
 
 ?>
 
